@@ -1,0 +1,19 @@
+.kwugwo-checkout {
+	max-width: 520px;
+	margin: 1.5em 0;
+}
+
+.kwugwo-checkout__intro {
+	margin-bottom: 1em;
+}
+
+#kwugwo-pay-button.kwugwo-busy {
+	opacity: 0.6;
+	cursor: progress;
+}
+
+.kwugwo-checkout__status {
+	margin-top: 1em;
+	min-height: 1.2em;
+	color: #555;
+}
