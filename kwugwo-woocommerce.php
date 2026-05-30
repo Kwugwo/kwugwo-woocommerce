@@ -7,7 +7,7 @@
  * Author:      Kwugwo
  * Author URI:  https://kwugwo.africa
  * License:     GPL-2.0-or-later
- * Text Domain: kwugwo-woocommerce
+ * Text Domain: kwugwo-for-woocommerce
  * Requires PHP: 7.4
  * Requires at least: 6.0
  * WC requires at least: 7.0
@@ -56,8 +56,6 @@ function kwugwo_wc_init() {
 
 	// Boot the webhook listener (registers the wc-api endpoint).
 	Kwugwo_Webhook::instance();
-
-	load_plugin_textdomain( 'kwugwo-woocommerce', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 }
 
 /**

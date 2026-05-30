@@ -39,7 +39,7 @@ class Kwugwo_Webhook {
 	 */
 	public function handle() {
 		$raw_body  = file_get_contents( 'php://input' );
-		$signature = isset( $_SERVER['HTTP_X_KWUGWO_SIGNATURE'] ) ? wp_unslash( $_SERVER['HTTP_X_KWUGWO_SIGNATURE'] ) : '';
+		$signature = isset( $_SERVER['HTTP_X_KWUGWO_SIGNATURE'] ) && is_string( $_SERVER['HTTP_X_KWUGWO_SIGNATURE'] ) ? sanitize_text_field( $_SERVER['HTTP_X_KWUGWO_SIGNATURE'] ) : '';
 
 		if ( '' === $raw_body ) {
 			$this->respond( 400, 'empty body' );
@@ -180,19 +180,6 @@ class Kwugwo_Webhook {
 			if ( $order && $order->get_meta( WC_Gateway_Kwugwo::META_UGWO_UID ) === $ugwo_uid ) {
 				return $order;
 			}
-		}
-
-		// Fallback: look the order up by stored ugwo uid.
-		$orders = wc_get_orders(
-			array(
-				'limit'      => 1,
-				'meta_key'   => WC_Gateway_Kwugwo::META_UGWO_UID,
-				'meta_value' => $ugwo_uid,
-			)
-		);
-
-		if ( ! empty( $orders ) ) {
-			return $orders[0];
 		}
 
 		return null;
